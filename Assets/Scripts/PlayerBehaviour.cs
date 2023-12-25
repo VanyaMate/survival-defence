@@ -1,24 +1,33 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Diagnostics;
+using Controllers;
+using Unity.VisualScripting;
 using UnityEngine;
+using Debug = UnityEngine.Debug;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    public static PlayerBehaviour instance { get; private set; }
-
     [SerializeField] private ActorBehaviour _actor;
 
     [Header("Sens")] [SerializeField] [Range(100, 600)]
     private float _x_sens;
 
     [SerializeField] [Range(100, 600)] private float _y_sens;
+    [Header("camera")] [SerializeField] private Camera _camera;
+
+    [Header("UI")] [SerializeField] private UIBehaviour _uiBehaviour;
+
+    private IInteractController _interactController;
 
     public ActorBehaviour CurrentActor => this._actor;
 
     private void Awake()
     {
-        PlayerBehaviour.instance = this;
+        this._interactController = new InteractController(this._camera);
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
     }
 
     private void Update()
@@ -34,13 +43,43 @@ public class PlayerBehaviour : MonoBehaviour
         );
 
         bool jump = Input.GetKeyDown(KeyCode.Space);
+        bool interact = Input.GetKeyDown(KeyCode.F);
+        bool inventory = Input.GetKeyDown(KeyCode.Tab);
+        bool close = Input.GetKeyDown(KeyCode.Escape);
+        bool uiOpened = this._uiBehaviour.Opened();
 
-        if (jump)
+        if (inventory)
         {
-            this._actor.Jump();
+            this._uiBehaviour.Inventory(true, this._actor.InventoryController);
         }
 
-        this._actor.MoveDirection(moveDirection);
-        this._actor.Orientation(mouseMoveDirection);
+        if (close)
+        {
+            if (uiOpened)
+            {
+                this._uiBehaviour.CloseAll();
+            }
+            else
+            {
+                this._uiBehaviour.Menu(true);
+            }
+        }
+
+        if (!uiOpened)
+        {
+            if (jump)
+            {
+                this._actor.Jump();
+            }
+
+            if (interact)
+            {
+                this._interactController.Interact(this);
+            }
+
+            this._interactController.Raycast(2f);
+            this._actor.MoveDirection(moveDirection);
+            this._actor.Orientation(mouseMoveDirection);
+        }
     }
 }
