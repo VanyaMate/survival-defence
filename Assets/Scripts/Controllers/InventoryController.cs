@@ -17,6 +17,13 @@ namespace Controllers
         // Возвращает количество айтемов которые ВЗЯТЫ
         int TakeItem(TItem item, int amount);
 
+        // Проверить наличие в инвентаре нужное количество вещей
+        int CheckItem(TItem item);
+
+        // Взять все айтемы из инвентаря
+        // Возвращает количество взятых айтемов
+        int TakeAllItems(TItem item);
+
         // Вернуть инвентарь
         Dictionary<TItem, int> ShowInventory();
 
@@ -57,7 +64,7 @@ namespace Controllers
         {
             if (this._inventory.TryGetValue(item, out int inventoryAmount))
             {
-                if (amount > inventoryAmount)
+                if (amount >= inventoryAmount)
                 {
                     this._inventory.Remove(item);
                     this._emitter.Invoke(this._inventory);
@@ -65,7 +72,7 @@ namespace Controllers
                 }
                 else
                 {
-                    this._inventory.Add(item, inventoryAmount - amount);
+                    this._inventory[item] = inventoryAmount - amount;
                     this._emitter.Invoke(this._inventory);
                     return amount;
                 }
@@ -74,6 +81,19 @@ namespace Controllers
             {
                 return 0;
             }
+        }
+
+        public int CheckItem(SO_InventoryItem item)
+        {
+            this._inventory.TryGetValue(item, out int inventoryAmount);
+            return inventoryAmount;
+        }
+
+        public int TakeAllItems(SO_InventoryItem item)
+        {
+            this._inventory.TryGetValue(item, out int inventoryAmount);
+            this._inventory.Remove(item);
+            return inventoryAmount;
         }
 
         public Inventory ShowInventory()

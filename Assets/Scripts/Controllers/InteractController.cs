@@ -1,3 +1,4 @@
+using Components.Interact;
 using UnityEngine;
 
 namespace Controllers
@@ -26,12 +27,30 @@ namespace Controllers
             if (Physics.Raycast(ray, out RaycastHit hit, distance))
             {
                 InteractBehaviour interactBehaviour = hit.collider.GetComponent<InteractBehaviour>();
+
+                if ((interactBehaviour == null || this._interactItem != interactBehaviour) && this._interactItem)
+                {
+                    this._interactItem.OnUnHover(this._player);
+                }
+
                 if (interactBehaviour != null)
                 {
-                    this._interactItem = interactBehaviour;
+                    if (interactBehaviour != this._interactItem)
+                    {
+                        this._interactItem = interactBehaviour;
+                        this._interactItem.OnHover(this._player);
+                    }
                 }
                 else
                 {
+                    this._interactItem = null;
+                }
+            }
+            else
+            {
+                if (this._interactItem)
+                {
+                    this._interactItem.OnUnHover(this._player);
                     this._interactItem = null;
                 }
             }
