@@ -17,7 +17,7 @@ namespace Controllers
             OnSuccessCallback onSuccessCallback
         );
 
-        public void Tick(float deltaTime);
+        public float Tick(float deltaTime);
 
         public void Stop();
     }
@@ -36,6 +36,11 @@ namespace Controllers
             return !this._finished;
         }
 
+        public float Progress()
+        {
+            return 100 / this._targetProgress * this._progress;
+        }
+
         public void Start(
             float timeToProgress,
             OnProgressCallback onProgressCallback,
@@ -51,7 +56,7 @@ namespace Controllers
             this._finished = false;
         }
 
-        public void Tick(float deltaTime)
+        public float Tick(float deltaTime)
         {
             this._progress += deltaTime;
             if ((this._progress >= this._targetProgress) && !this._finished)
@@ -59,17 +64,25 @@ namespace Controllers
                 this._finished = true;
                 this._onProgressCallback(100);
                 this._onSuccessCallback();
+                return 100;
             }
             else if (!this._finished)
             {
-                this._onProgressCallback(100 / this._targetProgress * this._progress);
+                float progress = this.Progress();
+                this._onProgressCallback(progress);
+                return progress;
             }
+
+            return 0;
         }
 
         public void Stop()
         {
-            this._finished = true;
-            this._onCancelCallback();
+            if (!this._finished)
+            {
+                this._finished = true;
+                this._onCancelCallback();   
+            }
         }
     }
 }

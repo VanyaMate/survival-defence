@@ -1,4 +1,7 @@
+using Components.Interact;
 using Controllers;
+using UI.Progress;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class PlayerBehaviour : MonoBehaviour
@@ -12,14 +15,17 @@ public class PlayerBehaviour : MonoBehaviour
     [Header("camera")] [SerializeField] private Camera _camera;
 
     [Header("UI")] [SerializeField] private UIBehaviour _uiBehaviour;
+    [SerializeField] private UIProgress _uiProgress;
 
     private IInteractController _interactController;
+    private IUIProgressController _uiProgressController;
 
     public ActorBehaviour CurrentActor => this._actor;
 
     private void Awake()
     {
         this._interactController = new InteractController(this._camera);
+        this._uiProgressController = new UIProgressController(this._uiProgress);
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -37,7 +43,7 @@ public class PlayerBehaviour : MonoBehaviour
         );
 
         bool jump = Input.GetKeyDown(KeyCode.Space);
-        bool interact = Input.GetKeyDown(KeyCode.F);
+        bool interact = Input.GetKey(KeyCode.F);
         bool inventory = Input.GetKeyDown(KeyCode.Tab);
         bool close = Input.GetKeyDown(KeyCode.Escape);
         bool uiOpened = this._uiBehaviour.Opened();
@@ -68,7 +74,27 @@ public class PlayerBehaviour : MonoBehaviour
 
             if (interact)
             {
-                this._interactController.Interact(this);
+                InteractBehaviour interactBehaviour = this._interactController.Interact(this);
+                if (interactBehaviour != null)
+                {
+                    if (interactBehaviour.Progress != 0 && interactBehaviour.Progress != 100)
+                    {
+                        this._uiProgressController.SetText(interactBehaviour.InteractText);
+                        this._uiProgressController.Progress(interactBehaviour.Progress);
+                    }
+                    else
+                    {
+                        this._uiProgressController.Hide();
+                    }
+                }
+                else
+                {
+                    this._uiProgressController.Hide();
+                }
+            }
+            else
+            {
+                this._uiProgressController.Hide();
             }
 
             this._interactController.Raycast(2f);

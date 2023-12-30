@@ -3,10 +3,15 @@ using UnityEngine;
 
 namespace Controllers
 {
+    public delegate InteractBehaviour OnHoverCallback();
+
+    public delegate InteractBehaviour OnUnHoverCallback();
+
     public interface IInteractController
     {
         void Raycast(float distance);
-        void Interact(PlayerBehaviour player);
+        InteractBehaviour Interact(PlayerBehaviour player);
+        void CancelInteract(PlayerBehaviour playerBehaviour);
     }
 
     public class InteractController : IInteractController
@@ -56,11 +61,21 @@ namespace Controllers
             }
         }
 
-        public void Interact(PlayerBehaviour player)
+        public InteractBehaviour Interact(PlayerBehaviour player)
         {
             if (this._interactItem != null)
             {
-                this._interactItem.Interact(player);
+                return this._interactItem.Interact(player);
+            }
+
+            return null;
+        }
+
+        public void CancelInteract(PlayerBehaviour player)
+        {
+            if (this._interactItem != null)
+            {
+                this._interactItem.CancelInteract(player);
             }
         }
     }

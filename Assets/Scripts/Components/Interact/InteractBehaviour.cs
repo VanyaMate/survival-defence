@@ -6,8 +6,14 @@ namespace Components.Interact
     {
         [SerializeField] protected string _name;
         [SerializeField] protected string _preInteractText;
+        protected float _progress = 0;
+        protected string _interactText = "";
+        public float Progress => this._progress;
+        public string InteractText => this._interactText;
 
-        public abstract void Interact(PlayerBehaviour playerBehaviour);
+        public abstract InteractBehaviour Interact(PlayerBehaviour playerBehaviour);
+        public abstract InteractBehaviour ProcessInteract(PlayerBehaviour playerBehaviour);
+        public abstract void CancelInteract(PlayerBehaviour playerBehaviour);
         public abstract void OnHover(PlayerBehaviour playerBehaviour);
         public abstract void OnUnHover(PlayerBehaviour playerBehaviour);
     }

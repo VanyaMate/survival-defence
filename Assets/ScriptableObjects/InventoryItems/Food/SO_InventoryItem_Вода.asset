@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ad154ed1ab270bc41a7e0bc637df3418, type: 3}
-  m_Name: "SO_InventoryItem_\u0420\u0430\u0433\u0443"
+  m_Name: "SO_InventoryItem_\u0412\u043E\u0434\u0430"
   m_EditorClassIdentifier: 
-  Icon: {fileID: 21300000, guid: e5889978c9188e440967673655992cc5, type: 3}
-  Title: "\u0420\u0430\u0433\u0443"
+  Icon: {fileID: 0}
+  Title: "\u0412\u0435\u0434\u0440\u043E \u0432\u043E\u0434\u044B"
   Weight: 3
   Prefab: {fileID: 0}
