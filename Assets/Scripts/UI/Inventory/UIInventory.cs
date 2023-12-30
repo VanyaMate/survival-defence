@@ -40,7 +40,7 @@ namespace UI.Inventory
             foreach (KeyValuePair<SO_InventoryItem, int> inventoryItem in inventory)
             {
                 UIInventoryItem item = Instantiate(this._itemPrefab, this._container.transform);
-                item.Set(inventoryItem.Key, inventoryItem.Value);
+                item.Set(inventoryItem.Key, inventoryItem.Value, 100);
             }
         }
 

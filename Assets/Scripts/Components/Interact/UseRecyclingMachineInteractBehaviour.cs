@@ -1,3 +1,5 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using Controllers;
 using ScriptableObjects;
@@ -8,6 +10,8 @@ namespace Components.Interact
     public class UseRecyclingMachineInteractBehaviour : InteractBehaviour
     {
         [SerializeField] private Reciep _reciep;
+        private IProcessController _processController = new ProcessController();
+        private Coroutine _processCoroutine;
 
         public override void Interact(PlayerBehaviour playerBehaviour)
         {
@@ -30,17 +34,19 @@ namespace Components.Interact
 
                 if (haveAll)
                 {
-                    this._reciep.From.ForEach(
-                        (item) =>
+                    this._processController.Start(
+                        2,
+                        (float progress) => Debug.Log($"Progress: {progress}%"),
+                        () => { Debug.Log("Cancel"); },
+                        () =>
                         {
-                            inventory.TakeItem(item.Item, item.Amount);
+                            this._reciep.From.ForEach(
+                                (item) => { inventory.TakeItem(item.Item, item.Amount); }
+                            );
+                            this._reciep.To.ForEach(
+                                (item) => { inventory.PutItem(item.Item, item.Amount); }
+                            );
                         }
-                    );
-                    this._reciep.To.ForEach(
-                        (item) =>
-                        {
-                            inventory.PutItem(item.Item, item.Amount);
-                        }    
                     );
                 }
                 else
@@ -49,6 +55,14 @@ namespace Components.Interact
                         (row) => { Debug.Log(row); }
                     );
                 }
+            }
+        }
+
+        private void Update()
+        {
+            if (this._processController.InProcess())
+            {
+                this._processController.Tick(Time.deltaTime);
             }
         }
 
