@@ -11,7 +11,6 @@ namespace Components.Interact
     public class UseHandRecyclingMachineInteractBehaviour : InteractBehaviour
     {
         [SerializeField] private SO_Reciep _reciep;
-        private IProcessController _processController = new ProcessController();
 
         public override InteractBehaviour Interact(PlayerBehaviour playerBehaviour)
         {
@@ -65,12 +64,6 @@ namespace Components.Interact
                 }
             }
 
-            return this;
-        }
-
-        public override InteractBehaviour ProcessInteract(PlayerBehaviour playerBehaviour)
-        {
-            this._progress = this._processController.Tick(Time.deltaTime);
             return this;
         }
 
