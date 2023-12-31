@@ -11,12 +11,12 @@ namespace Controllers
     public class FirstPersonCameraController : IFirstPersonCameraController
     {
         private readonly Transform _actorWithCamera;
-        private readonly Camera _firstPersonCamera;
+        private readonly UnityEngine.Camera _firstPersonCamera;
 
         private float _x;
         private float _y;
 
-        public FirstPersonCameraController(Transform actor, Camera camera)
+        public FirstPersonCameraController(Transform actor, UnityEngine.Camera camera)
         {
             this._actorWithCamera = actor;
             this._firstPersonCamera = camera;

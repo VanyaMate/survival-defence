@@ -1,0 +1,98 @@
+<mxfile host="app.diagrams.net" modified="2023-12-31T15:10:06.521Z" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/120.0.0.0 Safari/537.36" etag="f_ZNqkaFjVC4yKVgMiK_" version="22.1.16" type="device">
+  <diagram name="Страница — 1" id="AGVO3sG0kxf8tdmtB7_7">
+    <mxGraphModel dx="989" dy="564" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-3" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="189.9999999999999" y="250" as="sourcePoint" />
+            <mxPoint x="149.9999999999999" y="340" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-1" value="IPlayerController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="150" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-2" value="IInput" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="110" y="340" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-16" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-6" target="1RQyv3gTzi4V6r9IKatV-15">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-17" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-6" target="1RQyv3gTzi4V6r9IKatV-11">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-6" value="IActorController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-8" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-1" target="1RQyv3gTzi4V6r9IKatV-6">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="210" y="320" as="sourcePoint" />
+            <mxPoint x="260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-9" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.182;entryY=1.021;entryDx=0;entryDy=0;entryPerimeter=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-2" target="1RQyv3gTzi4V6r9IKatV-1">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="320" y="220" as="sourcePoint" />
+            <mxPoint x="260" y="270" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-11" value="IInteractItemController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="190" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-12" value="ICameraController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="380" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-13" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-1" target="1RQyv3gTzi4V6r9IKatV-12">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="220" y="260" as="sourcePoint" />
+            <mxPoint x="347" y="402" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-15" value="IInventoryController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-18" value="move" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="160" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-19" value="rotate" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="170" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-20" value="interact" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;" vertex="1" parent="1">
+          <mxGeometry x="300" y="180" width="60" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-21" value="ICharacterController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="560" y="60" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-22" value="" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.723;exitY=-0.036;exitDx=0;exitDy=0;exitPerimeter=0;entryX=0;entryY=1;entryDx=0;entryDy=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-6" target="1RQyv3gTzi4V6r9IKatV-21">
+          <mxGeometry relative="1" as="geometry">
+            <mxPoint x="430" y="200" as="sourcePoint" />
+            <mxPoint x="430" y="130" as="targetPoint" />
+            <Array as="points">
+              <mxPoint x="447" y="150" />
+              <mxPoint x="560" y="150" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-23" value="IUIController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="480" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-24" value="" style="endArrow=classic;html=1;rounded=0;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-1" target="1RQyv3gTzi4V6r9IKatV-23">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="260" as="sourcePoint" />
+            <mxPoint x="370" y="320" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-25" value="IInteractController" style="rounded=0;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="280" width="120" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="1RQyv3gTzi4V6r9IKatV-26" value="" style="endArrow=classic;html=1;rounded=0;exitX=1;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="1RQyv3gTzi4V6r9IKatV-1" target="1RQyv3gTzi4V6r9IKatV-25">
+          <mxGeometry width="50" height="50" relative="1" as="geometry">
+            <mxPoint x="280" y="260" as="sourcePoint" />
+            <mxPoint x="370" y="420" as="targetPoint" />
+          </mxGeometry>
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>

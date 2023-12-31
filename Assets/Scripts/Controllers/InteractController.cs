@@ -17,18 +17,18 @@ namespace Controllers
     public class InteractController : IInteractController
     {
         private PlayerBehaviour _player;
-        private Camera _camera;
+        private UnityEngine.Camera _camera;
         private InteractBehaviour _interactItem;
 
 
-        public InteractController(Camera camera)
+        public InteractController(UnityEngine.Camera camera)
         {
             this._camera = camera;
         }
 
         public void Raycast(float distance)
         {
-            Ray ray = this._camera.ScreenPointToRay(Input.mousePosition);
+            Ray ray = this._camera.ScreenPointToRay(UnityEngine.Input.mousePosition);
             if (Physics.Raycast(ray, out RaycastHit hit, distance))
             {
                 InteractBehaviour interactBehaviour = hit.collider.GetComponent<InteractBehaviour>();

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Data;
 using Controllers;
 using ScriptableObjects;
 using TMPro;
@@ -12,7 +13,7 @@ namespace Components.Interact
     {
         [SerializeField] private SO_Reciep _reciep;
 
-        public override InteractBehaviour Interact(PlayerBehaviour playerBehaviour)
+        /*public override InteractBehaviour Interact(PlayerBehaviour playerBehaviour)
         {
             if (this._processController.InProcess())
             {
@@ -65,6 +66,11 @@ namespace Components.Interact
             }
 
             return this;
+        }*/
+
+        public override InteractBehaviour Interact(PlayerBehaviour playerBehaviour)
+        {
+            throw new NotImplementedException();
         }
 
         public override void CancelInteract(PlayerBehaviour playerBehaviour)
