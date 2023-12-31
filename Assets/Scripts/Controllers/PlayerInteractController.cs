@@ -1,4 +1,4 @@
-using Components.Interact;
+using Components.InteractPrevious;
 using UnityEngine;
 
 namespace Controllers
@@ -7,21 +7,21 @@ namespace Controllers
 
     public delegate InteractBehaviour OnUnHoverCallback();
 
-    public interface IInteractController
+    public interface IPlayerInteractController
     {
         void Raycast(float distance);
         InteractBehaviour Interact(PlayerBehaviour player);
         void CancelInteract(PlayerBehaviour playerBehaviour);
     }
 
-    public class InteractController : IInteractController
+    public class PlayerInteractController : IPlayerInteractController
     {
         private PlayerBehaviour _player;
         private UnityEngine.Camera _camera;
         private InteractBehaviour _interactItem;
 
 
-        public InteractController(UnityEngine.Camera camera)
+        public PlayerInteractController(UnityEngine.Camera camera)
         {
             this._camera = camera;
         }

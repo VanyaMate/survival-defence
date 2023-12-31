@@ -2,6 +2,6 @@ namespace Controllers
 {
     public interface IUpdateController
     {
-        void Update();
+        void Update(float deltaTime);
     }
 }

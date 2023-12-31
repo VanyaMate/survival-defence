@@ -2,7 +2,7 @@ using Controllers;
 using ScriptableObjects;
 using UnityEngine;
 
-namespace Components.Interact
+namespace Components.InteractPrevious
 {
     public class TakeInteractBehaviour : InteractBehaviour
     {
@@ -19,7 +19,7 @@ namespace Components.Interact
             else
             {
                 ActorBehaviour actorBehaviour = playerBehaviour.CurrentActor;
-                if (actorBehaviour.InventoryController != null)
+                if (actorBehaviour.ActorController.InventoryController != null)
                 {
                     this._interactText = $"Берем {this._item.Title}";
                     this._processController.Start(
@@ -28,7 +28,7 @@ namespace Components.Interact
                         onProgressCallback: (float progress) => { Debug.Log("Take progress " + progress + "%"); },
                         onSuccessCallback: () =>
                         {
-                            actorBehaviour.InventoryController.PutItem(this._item, this._amount);
+                            actorBehaviour.ActorController.InventoryController.PutItem(this._item, this._amount);
                             Destroy(gameObject);
                         }
                     );

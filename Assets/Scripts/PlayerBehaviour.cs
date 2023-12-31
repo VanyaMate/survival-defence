@@ -1,105 +1,56 @@
-using Components.Interact;
-using Controllers;
-using UI.Progress;
-using Unity.VisualScripting;
+using Controllers.Input;
+using Controllers.Interact;
 using UnityEngine;
+using IPlayerInteractController = Controllers.Interact.IPlayerInteractController;
+using PlayerInteractController = Controllers.Interact.PlayerInteractController;
 
 public class PlayerBehaviour : MonoBehaviour
 {
+    [SerializeField] private Camera _camera;
     [SerializeField] private ActorBehaviour _actor;
 
     [Header("Sens")] [SerializeField] [Range(100, 600)]
     private float _x_sens;
 
     [SerializeField] [Range(100, 600)] private float _y_sens;
-    [Header("camera")] [SerializeField] private Camera _camera;
 
-    [Header("UI")] [SerializeField] private UIBehaviour _uiBehaviour;
-    [SerializeField] private UIProgress _uiProgress;
-
-    private IInteractController _interactController;
-    private IUIProgressController _uiProgressController;
+    private IInputController _inputController;
+    private IPlayerInteractController _interactController;
 
     public ActorBehaviour CurrentActor => this._actor;
 
     private void Awake()
     {
-        this._interactController = new InteractController(this._camera);
-        this._uiProgressController = new UIProgressController(this._uiProgress);
-        Cursor.lockState = CursorLockMode.Locked;
-        Cursor.visible = false;
+        this._inputController = new InputController();
+        this._interactController = new PlayerInteractController(this._camera, 3f);
+        this._interactController.Enable(true);
     }
 
     private void Update()
     {
-        Vector2 mouseMoveDirection = new Vector2(
-            Input.GetAxisRaw("Mouse X"),
-            Input.GetAxisRaw("Mouse Y")
-        );
+        this._interactController.Update(Time.deltaTime);
+        this._actor.ActorController.CharacterController.MoveDirection(this._inputController.Direction());
+        this._actor.ActorController.CharacterController.Rotate(this._inputController.MouseMove());
 
-        Vector2 moveDirection = new Vector2(
-            Input.GetAxisRaw("Horizontal"),
-            Input.GetAxisRaw("Vertical")
-        );
-
-        bool jump = Input.GetKeyDown(KeyCode.Space);
-        bool interact = Input.GetKey(KeyCode.F);
-        bool inventory = Input.GetKeyDown(KeyCode.Tab);
-        bool close = Input.GetKeyDown(KeyCode.Escape);
-        bool uiOpened = this._uiBehaviour.Opened();
-
-        if (inventory)
+        if (this._inputController.Jump())
         {
-            this._uiBehaviour.Inventory(true, this._actor.InventoryController);
+            this._actor.ActorController.CharacterController.Jump(1);
         }
 
-        if (close)
+        if (this._inputController.Use() && this._interactController.Item != null)
         {
-            if (uiOpened)
-            {
-                this._uiBehaviour.CloseAll();
-            }
-            else
-            {
-                this._uiBehaviour.Menu(true);
-            }
-        }
-
-        if (!uiOpened)
-        {
-            if (jump)
-            {
-                this._actor.Jump();
-            }
-
-            if (interact)
-            {
-                InteractBehaviour interactBehaviour = this._interactController.Interact(this);
-                if (interactBehaviour != null)
+            this._interactController.Item.StartInteract(
+                this._actor.ActorController,
+                new InteractState()
                 {
-                    if (interactBehaviour.Progress != 0 && interactBehaviour.Progress != 100)
-                    {
-                        this._uiProgressController.SetText(interactBehaviour.InteractText);
-                        this._uiProgressController.Progress(interactBehaviour.Progress);
-                    }
-                    else
-                    {
-                        this._uiProgressController.Hide();
-                    }
+                    OnStart = () => { Debug.Log("Start"); },
+                    OnFinish = () => { Debug.Log("Finish"); },
+                    OnCancel = () => { Debug.Log("Cancel"); },
+                    OnProcess = (float percent) => { Debug.Log($"Progress {percent}%"); },
+                    Time = 0,
+                    TimeToEnd = 3f
                 }
-                else
-                {
-                    this._uiProgressController.Hide();
-                }
-            }
-            else
-            {
-                this._uiProgressController.Hide();
-            }
-
-            this._interactController.Raycast(2f);
-            this._actor.MoveDirection(moveDirection);
-            this._actor.Orientation(mouseMoveDirection);
+            );
         }
     }
 }

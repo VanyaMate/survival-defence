@@ -1,8 +1,7 @@
-using System;
 using Controllers;
 using UnityEngine;
 
-namespace Components.Interact
+namespace Components.InteractPrevious
 {
     public abstract class InteractBehaviour : MonoBehaviour
     {

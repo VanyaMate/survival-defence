@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Controllers;
+using Controllers.Inventory;
 using ScriptableObjects;
 using UnityEngine;
 using Debug = UnityEngine.Debug;
@@ -31,7 +32,7 @@ namespace UI.Inventory
             this._inventoryController?.Unsubscribe(this.Render);
             this._inventoryController = inventoryController;
             this._inventoryController.Subscribe(this.Render);
-            this.Render(this._inventoryController.ShowInventory());
+            this.Render(this._inventoryController.Inventory);
         }
 
         private void Render(Dictionary<SO_InventoryItem, int> inventory)

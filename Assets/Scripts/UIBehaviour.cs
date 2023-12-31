@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Controllers;
+using Controllers.Inventory;
 using ScriptableObjects;
 using UI.Inventory;
 using UnityEngine;

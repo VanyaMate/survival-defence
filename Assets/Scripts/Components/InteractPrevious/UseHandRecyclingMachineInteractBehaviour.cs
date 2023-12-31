@@ -1,13 +1,8 @@
 using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.Data;
-using Controllers;
 using ScriptableObjects;
-using TMPro;
 using UnityEngine;
 
-namespace Components.Interact
+namespace Components.InteractPrevious
 {
     public class UseHandRecyclingMachineInteractBehaviour : InteractBehaviour
     {

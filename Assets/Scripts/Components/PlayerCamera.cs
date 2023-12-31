@@ -10,8 +10,8 @@ namespace Components
 
         private void Update()
         {
-            this._camera.transform.position = this._player.CurrentActor.CameraPosition.transform.position;
-            this._camera.transform.rotation = this._player.CurrentActor.CameraPosition.transform.rotation;
+            this._camera.transform.position = this._player.CurrentActor.Head.transform.position;
+            this._camera.transform.rotation = this._player.CurrentActor.Head.transform.rotation;
         }
     }
 }

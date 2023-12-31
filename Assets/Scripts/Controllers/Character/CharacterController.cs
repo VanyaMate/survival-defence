@@ -27,18 +27,18 @@ namespace Controllers.Character
             this._gravity = gravity;
         }
 
-        public void Update()
+        public void Update(float deltaTime)
         {
             if (!this._unityCharacterController.isGrounded || this._moveDirection.y > 0)
             {
-                this._moveDirection.y -= this._gravity * 2 * Time.deltaTime;
+                this._moveDirection.y -= this._gravity * 2 * deltaTime;
             }
             else
             {
                 this._moveDirection.y = -1f;
             }
 
-            this._unityCharacterController.Move(this._moveDirection * Time.deltaTime);
+            this._unityCharacterController.Move(this._moveDirection * deltaTime);
         }
 
         public void MoveDirection(Vector2 direction)

@@ -1,4 +1,4 @@
-using Components.Interact;
+using Components.InteractPrevious;
 using UnityEngine;
 
 namespace ScriptableObjects
