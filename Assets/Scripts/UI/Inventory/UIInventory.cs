@@ -1,9 +1,7 @@
 using System.Collections.Generic;
-using Controllers;
 using Controllers.Inventory;
 using ScriptableObjects;
 using UnityEngine;
-using Debug = UnityEngine.Debug;
 
 namespace UI.Inventory
 {

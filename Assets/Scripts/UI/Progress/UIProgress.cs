@@ -25,7 +25,6 @@ namespace UI.Progress
         {
             this._rt = this._progressFiller.GetComponent<RectTransform>();
             this._x = this._progressFiller.transform.parent.GetComponent<RectTransform>().sizeDelta.x;
-            Debug.Log(this._x);
         }
 
         public void SetText(string text)

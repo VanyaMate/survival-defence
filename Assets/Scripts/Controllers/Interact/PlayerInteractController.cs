@@ -1,4 +1,5 @@
 using Components.Interact;
+using Controllers.Actor;
 using UnityEngine;
 
 namespace Controllers.Interact
@@ -8,19 +9,26 @@ namespace Controllers.Interact
         public InteractableItemComponent Item { get; }
         public void SetDistance(float distance);
         public void Enable(bool state);
+        public void ClearItem();
     }
 
     public class PlayerInteractController : IPlayerInteractController
     {
         private InteractableItemComponent _item;
         private UnityEngine.Camera _camera;
+        private IActorController _actor;
         private float _distance;
 
         public InteractableItemComponent Item => this._item;
 
-        public PlayerInteractController(UnityEngine.Camera camera, float distance)
+        public PlayerInteractController(
+            UnityEngine.Camera camera,
+            IActorController actorController,
+            float distance
+        )
         {
             this._camera = camera;
+            this._actor = actorController;
             this._distance = distance;
         }
 
@@ -34,11 +42,21 @@ namespace Controllers.Interact
                 {
                     if (interactBehaviour != this._item)
                     {
+                        if (this._item != null)
+                        {
+                            this._item.StopInteract(this._actor);
+                        }
+
                         this._item = interactBehaviour;
                     }
 
                     return;
                 }
+            }
+
+            if (this._item != null)
+            {
+                this._item.StopInteract(this._actor);
             }
 
             this._item = null;
@@ -58,6 +76,11 @@ namespace Controllers.Interact
         {
             Cursor.lockState = state ? CursorLockMode.Locked : CursorLockMode.None;
             Cursor.visible = !state;
+        }
+
+        public void ClearItem()
+        {
+            this._item = null;
         }
     }
 }

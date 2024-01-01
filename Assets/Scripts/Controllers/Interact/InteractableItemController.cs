@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using Controllers.Actor;
+using JetBrains.Annotations;
 using Utils;
 
 namespace Controllers.Interact
@@ -19,8 +20,8 @@ namespace Controllers.Interact
         public OnInteractProcessCallback OnProcess;
         public OnInteractStartCallback OnStart;
         public float Percent = 0;
-        public float Time;
-        public float TimeToEnd;
+        public float Time = 0;
+        public float TimeToEnd = 0;
         public bool Process = false;
     }
 
@@ -31,6 +32,8 @@ namespace Controllers.Interact
     public interface IInteractableItemController : IUpdateController, IEmitter<Interactors>
     {
         Interactors Interactors { get; }
+        bool Blocked { get; }
+        void BlockForNewInteractors(bool state);
         void StartInteract(IInteractController actorController, InteractState state, bool force = false);
         void StopInteract(IInteractController actorController);
         void StopAll();
@@ -39,8 +42,15 @@ namespace Controllers.Interact
     public class InteractableItemController : Emitter<Interactors>, IInteractableItemController
     {
         private Interactors _interactControllers = new Interactors();
+        private bool _blockedForNewInteractors = false;
 
         public Interactors Interactors => this._interactControllers;
+        public bool Blocked => this._blockedForNewInteractors;
+
+        public void BlockForNewInteractors(bool state)
+        {
+            this._blockedForNewInteractors = state;
+        }
 
         public void StartInteract(IInteractController interactController, InteractState state, bool force = false)
         {
@@ -97,12 +107,17 @@ namespace Controllers.Interact
                 controller.Invoke(controller.Percent);
                 if (controller.Time >= controller.TimeToEnd)
                 {
-                    controller.OnFinish();
                     finished.Add(interactController);
                 }
             }
 
-            finished.ForEach((item) => this._interactControllers.Remove(item));
+            finished.ForEach(
+                (item) =>
+                {
+                    this._interactControllers.Remove(item, out InteractState state);
+                    state.OnFinish();
+                }
+            );
         }
     }
 }

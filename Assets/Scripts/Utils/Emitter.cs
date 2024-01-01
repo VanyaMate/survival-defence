@@ -29,7 +29,6 @@ namespace Utils
 
         public void Invoke(TData data)
         {
-            Debug.Log("INVOKE" + data);
             this._callbacks.ForEach((callback) => callback(data));
         }
     }
