@@ -21,6 +21,7 @@ namespace Controllers.Interact
         public float Percent = 0;
         public float Time;
         public float TimeToEnd;
+        public bool Process = false;
     }
 
     public class Interactors : Dictionary<IInteractController, InteractState>
@@ -51,6 +52,7 @@ namespace Controllers.Interact
             if (!this._interactControllers.TryGetValue(interactController, out InteractState previousState))
             {
                 this._interactControllers.Add(interactController, state);
+                state.OnStart();
                 this.Invoke(this._interactControllers);
             }
         }
@@ -83,6 +85,12 @@ namespace Controllers.Interact
             foreach (var (interactController, interactState) in this._interactControllers)
             {
                 InteractState controller = this._interactControllers[interactController];
+
+                if (controller.Process)
+                {
+                    continue;
+                }
+
                 controller.Time += deltaTime;
                 controller.Percent = 100 / controller.TimeToEnd * controller.Time;
                 controller.OnProcess(controller.Percent);

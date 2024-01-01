@@ -7,7 +7,6 @@ namespace Components.Interact
 {
     public class TakeInteractableItemComponent : InteractableItemComponent
     {
-        [SerializeField] private SO_InventoryItem _item;
         [SerializeField] private int _amount;
 
         public override void StartInteract(IActorController actorController, InteractState interactState)
