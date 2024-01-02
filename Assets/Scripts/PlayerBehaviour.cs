@@ -42,7 +42,7 @@ public class PlayerBehaviour : MonoBehaviour
     private void Update()
     {
         this._interactController.Update(Time.deltaTime);
-        this._actor.ActorController.CharacterController.MoveDirection(this._inputController.Direction() * 2f);
+        this._actor.ActorController.CharacterController.MoveDirection(this._inputController.Direction() * 3f);
         this._actor.ActorController.CharacterController.Rotate(this._inputController.MouseMove());
 
         if (this._inputController.Jump())
