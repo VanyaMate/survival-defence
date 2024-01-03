@@ -68,7 +68,7 @@ namespace Controllers.Interact
         {
             return new InteractState()
             {
-                OnStart = () => { this._actorController.CharacterController.Jump(10f); },
+                OnStart = () => { this._actorController.CharacterController.Jump(2f); },
                 OnCancel = () => { },
                 OnFinish = () => { },
                 OnProcess = (float percent) => { },

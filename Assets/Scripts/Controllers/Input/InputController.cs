@@ -58,7 +58,7 @@ namespace Controllers.Input
 
         public bool Use()
         {
-            return UnityEngine.Input.GetKey(KeyCode.F);
+            return UnityEngine.Input.GetKeyDown(KeyCode.F);
         }
 
         public bool Close()
