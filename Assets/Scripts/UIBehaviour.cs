@@ -14,10 +14,12 @@ public class UIBehaviour : MonoBehaviour
 
     private void Awake()
     {
+        
+        
         this._uiController = new UIController(
             this._inventory.gameObject,
             this._menu
-        );
+        );  
     }
 
     public bool Opened()

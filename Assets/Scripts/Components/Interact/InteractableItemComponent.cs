@@ -1,6 +1,5 @@
 using Controllers.Actor;
 using Controllers.Interact;
-using JetBrains.Annotations;
 using ScriptableObjects;
 using UnityEngine;
 
@@ -18,6 +17,7 @@ namespace Components.Interact
     {
         [SerializeField] protected SO_Interactable _interactableType;
         [SerializeField] protected InteractableItemType _type;
+
         protected readonly IInteractableItemController _interactableItemController = new InteractableItemController();
 
         public IInteractableItemController InteractableItemController => this._interactableItemController;

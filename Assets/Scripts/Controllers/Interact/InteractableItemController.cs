@@ -1,6 +1,4 @@
 using System.Collections.Generic;
-using Controllers.Actor;
-using JetBrains.Annotations;
 using Utils;
 
 namespace Controllers.Interact

@@ -1,6 +1,8 @@
 using System;
+using Components.Interact;
 using Controllers.Input;
 using Controllers.Interact;
+using Controllers.UI;
 using UI.Inventory;
 using UI.Progress;
 using Unity.VisualScripting;
@@ -10,10 +12,12 @@ using PlayerInteractController = Controllers.Interact.PlayerInteractController;
 
 public class PlayerBehaviour : MonoBehaviour
 {
-    [SerializeField] private Camera _camera;
+    [Header("Actor")] [SerializeField] private Camera _camera;
     [SerializeField] private ActorBehaviour _actor;
-    [SerializeField] private UIProgress _uiProgress;
+
+    [Header("UI")] [SerializeField] private UIProgress _uiProgress;
     [SerializeField] private UIInventory _uiInventory;
+    [SerializeField] private HoverUIBehaviour _uiHover;
 
     [Header("Sens")] [SerializeField] [Range(100, 600)]
     private float _x_sens;
@@ -84,6 +88,35 @@ public class PlayerBehaviour : MonoBehaviour
             this._actor.ActorController.CharacterController.DisableRotate(!active);
             this._interactController.Enable(active);
             this._uiInventory.Show(!active);
+        }
+
+        if (this._interactController.Item)
+        {
+            this._uiHover.Show();
+
+            if (this._interactController.Item.Type == InteractableItemType.USE)
+            {
+                this._uiHover.ShowUse();
+            }
+            else if (this._interactController.Item.Type == InteractableItemType.TAKE)
+            {
+                this._uiHover.ShowTake(this._interactController.Item as TakeInteractableItemComponent);
+            }
+            else if (this._interactController.Item.Type == InteractableItemType.RECYCLING)
+            {
+                this._uiHover.ShowRecycle(
+                    this._interactController.Item as RecyclingInteractableItemComponent,
+                    this._actor.ActorController
+                );
+            }
+            else
+            {
+                this._uiHover.HideAll();
+            }
+        }
+        else
+        {
+            this._uiHover.Hide();
         }
     }
 }
