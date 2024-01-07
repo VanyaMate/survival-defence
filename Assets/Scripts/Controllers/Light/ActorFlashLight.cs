@@ -25,9 +25,9 @@ namespace Controllers.Light
         public void Tick(float deltaTime, float shakingPower)
         {
             _noiseOffset += new Vector3(1f, 1f, 1f) * _shakeSpeed * deltaTime * shakingPower;
-            float x = Mathf.PerlinNoise(_noiseOffset.x, 0f) * 2f - 1f;
-            float y = Mathf.PerlinNoise(0f, _noiseOffset.y) * 2f - 1f;
-            Vector3 noise = new Vector3(x, y, 0) * _shakingPower;
+            float x = Mathf.PerlinNoise(_noiseOffset.x, 0f) * (2f * shakingPower) - 1f;
+            float y = Mathf.PerlinNoise(0f, _noiseOffset.y) * (2f * shakingPower) - 1f;
+            Vector3 noise = new Vector3(x, y, 0) * _shakingPower * shakingPower;
             this._light.localPosition = noise;
             this._light.Rotate(Vector3.forward, _rotationSpeed * deltaTime);
         }

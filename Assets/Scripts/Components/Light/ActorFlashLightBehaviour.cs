@@ -26,7 +26,7 @@ namespace Components.Light
 
         private void Update()
         {
-            this._actorFlashLight.Tick(Time.deltaTime, 1);
+            this._actorFlashLight.Tick(Time.deltaTime, 2);
         }
     }
 }
