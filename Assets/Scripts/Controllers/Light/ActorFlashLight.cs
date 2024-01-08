@@ -24,7 +24,7 @@ namespace Controllers.Light
 
         public void Tick(float deltaTime, float shakingPower)
         {
-            _noiseOffset += new Vector3(1f, 1f, 1f) * _shakeSpeed * deltaTime * shakingPower;
+            _noiseOffset += new Vector3(1f, 1f, 1f) * _shakeSpeed * deltaTime * shakingPower * this._noiseScale;
             float x = Mathf.PerlinNoise(_noiseOffset.x, 0f) * (2f * shakingPower) - 1f;
             float y = Mathf.PerlinNoise(0f, _noiseOffset.y) * (2f * shakingPower) - 1f;
             Vector3 noise = new Vector3(x, y, 0) * _shakingPower * shakingPower;
