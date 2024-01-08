@@ -5,7 +5,6 @@ using Controllers.Interact;
 using Controllers.UI;
 using UI.Inventory;
 using UI.Progress;
-using Unity.VisualScripting;
 using UnityEngine;
 using IPlayerInteractController = Controllers.Interact.IPlayerInteractController;
 using PlayerInteractController = Controllers.Interact.PlayerInteractController;
@@ -88,6 +87,11 @@ public class PlayerBehaviour : MonoBehaviour
             this._actor.ActorController.CharacterController.DisableRotate(!active);
             this._interactController.Enable(active);
             this._uiInventory.Show(!active);
+        }
+
+        if (this._inputController.FlashLight())
+        {
+            this._actor.FlashLight.Toggle();
         }
 
         if (this._interactController.Item)

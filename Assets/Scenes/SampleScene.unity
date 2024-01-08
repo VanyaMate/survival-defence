@@ -2448,6 +2448,7 @@ GameObject:
   - component: {fileID: 1692310198}
   - component: {fileID: 1692310199}
   - component: {fileID: 1692310200}
+  - component: {fileID: 1692310201}
   m_Layer: 0
   m_Name: Spot Light
   m_TagString: Untagged
@@ -2548,6 +2549,19 @@ MonoBehaviour:
   _shakingSpeed: 1
   _rotationSpeed: 1
   _noiseScale: 0.4
+--- !u!114 &1692310201
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1692310197}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef63f7f1a92c430787409c94164b416e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _light: {fileID: 1692310199}
 --- !u!1 &1738340585
 GameObject:
   m_ObjectHideFlags: 0
@@ -2879,6 +2893,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _head: {fileID: 515885761}
   _inventoryType: {fileID: 11400000, guid: 631afeb3f80c0ad4babc7b75c10f3c66, type: 2}
+  _flashLight: {fileID: 1692310201}
 --- !u!143 &1765248560
 CharacterController:
   m_ObjectHideFlags: 0

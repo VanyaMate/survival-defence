@@ -13,11 +13,12 @@ namespace Controllers.Input
         bool OpenInventory();
         bool Use();
         bool Close();
+        bool FlashLight();
     }
 
     public class InputController : IInputController
     {
-        public InputController ()
+        public InputController()
         {
         }
 
@@ -64,6 +65,11 @@ namespace Controllers.Input
         public bool Close()
         {
             return UnityEngine.Input.GetKeyDown(KeyCode.Escape);
+        }
+
+        public bool FlashLight()
+        {
+            return UnityEngine.Input.GetKeyDown(KeyCode.L);
         }
     }
 }

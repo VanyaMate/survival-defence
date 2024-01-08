@@ -1,35 +1,33 @@
 using UnityEngine;
+using Utils;
 
 namespace Controllers.Light
 {
-    public class ActorFlashLight
+    public interface IActorFlashLight : IEmitter<bool>
     {
-        private float _shakingPower;
-        private Transform _light;
-        private float _shakeSpeed;
-        private float _rotationSpeed;
-        private Vector3 _noiseOffset;
-        private float _noiseScale;
+        void Toggle();
+        void Power(bool state);
+    }
 
-        public ActorFlashLight(Transform light, float shakingPower, float shakeSpeed, float rotationSpeed,
-            float noiseScale)
+    public class ActorFlashLight : Emitter<bool>, IActorFlashLight
+    {
+        private bool _state;
+
+        public ActorFlashLight(bool state)
         {
-            this._light = light;
-            this._shakingPower = shakingPower;
-            this._shakeSpeed = shakeSpeed;
-            this._rotationSpeed = rotationSpeed;
-            this._noiseScale = noiseScale;
-            this._noiseOffset = new Vector3(Random.Range(0f, 100f), Random.Range(0f, 100f), Random.Range(0f, 100f));
+            this._state = state;
         }
 
-        public void Tick(float deltaTime, float shakingPower)
+        public void Toggle()
         {
-            _noiseOffset += new Vector3(1f, 1f, 1f) * _shakeSpeed * deltaTime * shakingPower * this._noiseScale;
-            float x = Mathf.PerlinNoise(_noiseOffset.x, 0f) * (2f * shakingPower) - 1f;
-            float y = Mathf.PerlinNoise(0f, _noiseOffset.y) * (2f * shakingPower) - 1f;
-            Vector3 noise = new Vector3(x, y, 0) * _shakingPower * shakingPower;
-            this._light.localPosition = noise;
-            this._light.Rotate(Vector3.forward, _rotationSpeed * deltaTime);
+            this._state = !this._state;
+            this.Invoke(this._state);
+        }
+
+        public void Power(bool state)
+        {
+            this._state = state;
+            this.Invoke(this._state);
         }
     }
 }

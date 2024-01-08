@@ -6,27 +6,34 @@ namespace Components.Light
 {
     public class ActorFlashLightBehaviour : MonoBehaviour
     {
-        [SerializeField] private float _shakingPower = .1f;
-        [SerializeField] private float _shakingSpeed = 5f;
-        [SerializeField] private float _rotationSpeed = 5f;
-        [SerializeField] private float _noiseScale = 1f;
+        [SerializeField] private UnityEngine.Light _light;
 
-        private ActorFlashLight _actorFlashLight;
+        private IActorFlashLight _flashlight;
 
         private void Awake()
         {
-            this._actorFlashLight = new ActorFlashLight(
-                transform,
-                this._shakingPower,
-                this._shakingSpeed,
-                this._rotationSpeed,
-                this._noiseScale
-            );
+            this._flashlight = new ActorFlashLight(this._light.gameObject.activeSelf);
+            this._flashlight.Subscribe(this._onChange);
         }
 
-        private void Update()
+        public void Toggle()
         {
-            this._actorFlashLight.Tick(Time.deltaTime, 2);
+            this._flashlight.Toggle();
+        }
+
+        public void Power(bool state)
+        {
+            this._flashlight.Power(state);
+        }
+
+        private void OnDestroy()
+        {
+            this._flashlight.Unsubscribe(this._onChange);
+        }
+
+        private void _onChange(bool state)
+        {
+            this._light.gameObject.SetActive(state);
         }
     }
 }
