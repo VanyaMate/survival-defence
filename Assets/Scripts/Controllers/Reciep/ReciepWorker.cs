@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using Controllers.Inventory;
 using ScriptableObjects;
@@ -5,6 +6,20 @@ using Unity.VisualScripting;
 
 namespace Controllers.Reciep
 {
+    [Serializable]
+    public class ReciepList
+    {
+        public SO_InventoryItem Item;
+        public int Amount;
+    }
+
+    [Serializable]
+    public class Reciep
+    {
+        public List<ReciepList> From;
+        public List<ReciepList> To;
+    }
+    
     public class ReciepItemStatus
     {
         public SO_InventoryItem Item;
@@ -23,7 +38,7 @@ namespace Controllers.Reciep
     {
         public static ReciepCheck Check(
             IInventoryController<SO_InventoryItem> inventory,
-            Components.InteractPrevious.Reciep reciep
+            Reciep reciep
         )
         {
             List<ReciepItemStatus> itemStatusList = new List<ReciepItemStatus>();
@@ -59,7 +74,7 @@ namespace Controllers.Reciep
 
         public static void Convert(
             IInventoryController<SO_InventoryItem> inventory,
-            Components.InteractPrevious.Reciep reciep
+            Reciep reciep
         )
         {
             reciep.From.ForEach(

@@ -1,4 +1,3 @@
-using Components.InteractPrevious;
 using Controllers.Actor;
 using Controllers.Interact;
 using Controllers.Inventory;

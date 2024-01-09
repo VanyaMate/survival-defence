@@ -1,4 +1,4 @@
-using Components.InteractPrevious;
+using Controllers.Reciep;
 using UnityEngine;
 
 namespace ScriptableObjects

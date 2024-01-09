@@ -10,7 +10,8 @@ namespace Components.Interact
         TAKE, // Взять
         RECYCLING, // Перерабатывать
         USE, // Использовать (ждать)
-        OPEN, // Открыть (хранилище, меню здания) 
+        OPEN, // Открыть (хранилище)
+        PRODUCE, // Производящее здание с меню
     }
 
     public abstract class InteractableItemComponent : MonoBehaviour
