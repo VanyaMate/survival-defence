@@ -31,6 +31,12 @@ namespace Controllers.UI
             this._recycle.Show();
         }
 
+        public void ShowProduce(ProduceInteractableItemComponent item)
+        {
+            this.HideAll();
+            this._use.gameObject.SetActive(true);
+        }
+
         public void HideAll()
         {
             this._use.gameObject.SetActive(false);

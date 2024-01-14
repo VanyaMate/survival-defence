@@ -4,6 +4,7 @@ using Controllers.Input;
 using Controllers.Interact;
 using Controllers.UI;
 using UI.Inventory;
+using UI.Produce;
 using UI.Progress;
 using UnityEngine;
 using IPlayerInteractController = Controllers.Interact.IPlayerInteractController;
@@ -15,6 +16,7 @@ public class PlayerBehaviour : MonoBehaviour
     [SerializeField] private ActorBehaviour _actor;
 
     [Header("UI")] [SerializeField] private UIProgress _uiProgress;
+    [SerializeField] private UIProduce _uiProduce;
     [SerializeField] private UIInventory _uiInventory;
     [SerializeField] private HoverUIBehaviour _uiHover;
 
@@ -36,7 +38,11 @@ public class PlayerBehaviour : MonoBehaviour
 
     private void Start()
     {
-        this._interactStateFactory = new PlayerInteractStateFactory(this._actor.ActorController, this._uiProgress);
+        this._interactStateFactory = new PlayerInteractStateFactory(
+            this._actor.ActorController,
+            this._uiProgress,
+            this._uiProduce
+        );
         this._interactController = new PlayerInteractController(this._camera, this._actor.ActorController, 3f);
         this._interactController.Enable(true);
         this._uiInventory.Set(this._actor.ActorController.InventoryController);
@@ -111,6 +117,12 @@ public class PlayerBehaviour : MonoBehaviour
                 this._uiHover.ShowRecycle(
                     this._interactController.Item as RecyclingInteractableItemComponent,
                     this._actor.ActorController
+                );
+            }
+            else if (this._interactController.Item.Type == InteractableItemType.PRODUCE)
+            {
+                this._uiHover.ShowProduce(
+                    this._interactController.Item as ProduceInteractableItemComponent
                 );
             }
             else

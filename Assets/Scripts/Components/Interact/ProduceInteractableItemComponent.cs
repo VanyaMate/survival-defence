@@ -8,7 +8,7 @@ namespace Components.Interact
 {
     public class ProduceInteractableItemComponent : InteractableItemComponent
     {
-        [SerializeField] public List<SO_Reciep> Recieps = new();
+        [SerializeField] public SO_Produce Produce;
 
         public override void StartInteract(IActorController actorController, InteractState interactState)
         {

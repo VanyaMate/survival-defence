@@ -29,6 +29,8 @@ namespace Controllers.Interact
                     return this._TakeInteractState(takeComponent.Item, takeComponent.Amount);
                 case InteractableItemType.RECYCLING:
                     return this._RecyclingInteractState((component as RecyclingInteractableItemComponent)?.Reciep);
+                case InteractableItemType.PRODUCE:
+                    return this._ProduceInteractState();
                 default:
                     return this._DefaultInteractState();
             }
@@ -61,6 +63,21 @@ namespace Controllers.Interact
                 TimeToEnd = reciep.TimeToFinish,
                 Percent = 0f,
                 Process = false
+            };
+        }
+
+        private InteractState _ProduceInteractState()
+        {
+            return new InteractState()
+            {
+                OnStart = () => { this._actorController.CharacterController.Jump(2f); },
+                OnCancel = () => { },
+                OnFinish = () => { },
+                OnProcess = (float percent) => { },
+                Time = 0,
+                TimeToEnd = 0f,
+                Percent = 0f,
+                Process = true
             };
         }
 
